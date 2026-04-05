@@ -11,7 +11,7 @@ export default function Header() {
                             <path d="m6 8 3 3-3 3M13 14h4" />
                         </svg>
                     </div>
-                    <h1 className={styles.title}>Compiler<span className={styles.accent}>Pro</span></h1>
+                    <h1 className={styles.title}>Compile<span className={styles.accent}>Flow</span></h1>
                 </div>
                 <span className={styles.badge}>Full Pipeline Edition</span>
             </div>
