@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import styles from './WelcomeScreen.module.css';
 
 const FEATURES = [
@@ -22,12 +23,25 @@ export default function WelcomeScreen() {
             </div>
 
             <div className={styles.content}>
-                <div className={styles.iconWrap}>
-                    <div className={styles.pulseRing} />
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M4.5 16.5c-1.5 1.5-1.5 4 1.5 4s4-2 4-2l8-8c0 0 2-2 0-4s-4 0-4 0L5.5 15" />
-                        <path d="m14.5 6.5 3 3" />
-                    </svg>
+                <div className={styles.solarSystem}>
+                    <div className={styles.orbit} style={{ '--d': '15s', '--r': '100px', '--color': '#a855f7' }}>
+                        <div className={styles.planet} style={{ '--bg': '#a855f7' }}>C</div>
+                    </div>
+                    <div className={styles.orbit} style={{ '--d': '25s', '--r': '140px', '--color': '#3b82f6' }}>
+                        <div className={styles.planet} style={{ '--bg': '#3b82f6' }}>C++</div>
+                    </div>
+                    <div className={styles.orbit} style={{ '--d': '35s', '--r': '180px', '--color': '#f59e0b' }}>
+                        <div className={styles.planet} style={{ '--bg': '#f59e0b' }}>Py</div>
+                    </div>
+                    
+                    <div className={styles.sun}>
+                        <div className={styles.sunCore} />
+                        <div className={styles.sunGlow} />
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.sunIcon}>
+                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                            <circle cx="12" cy="12" r="4" />
+                        </svg>
+                    </div>
                 </div>
                 
                 <h2 className={styles.title}>Compiler Pipeline Ready</h2>

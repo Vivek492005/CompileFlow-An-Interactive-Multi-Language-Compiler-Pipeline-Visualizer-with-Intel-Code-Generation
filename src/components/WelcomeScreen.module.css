@@ -57,30 +57,117 @@
     animation-delay: var(--d);
 }
 
-.iconWrap {
-    width: 6rem;
-    height: 6rem;
-    border-radius: 50%;
-    background: rgba(168, 85, 247, 0.1);
-    border: 1px solid rgba(168, 85, 247, 0.3);
+.solarSystem {
+    width: 20rem;
+    height: 18rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 2rem;
     position: relative;
-    box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
-    animation: iconFloat 4s ease-in-out infinite;
+    margin-bottom: 2rem;
+    perspective: 1000px;
+    transform-style: preserve-3d;
 }
 
-.pulseRing {
+.sun {
+    width: 5rem;
+    height: 5rem;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sunCore {
     position: absolute;
-    top: -10%;
-    left: -10%;
-    width: 120%;
-    height: 120%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 30%, #ec4899, #a855f7);
     border-radius: 50%;
-    border: 1px solid rgba(168, 85, 247, 0.2);
-    animation: ringPulse 3s ease-out infinite;
+    box-shadow: 
+        inset -5px -5px 15px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(168, 85, 247, 0.6);
+    animation: sunPulse 4s ease-in-out infinite;
+}
+
+.sunGlow {
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: sunGlow 6s linear infinite;
+}
+
+.sunIcon {
+    position: relative;
+    z-index: 11;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.orbit {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    width: var(--r);
+    height: var(--r);
+    animation: orbitRotate var(--d) linear infinite;
+    transform-style: preserve-3d;
+}
+
+.orbit::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    border-radius: 50%;
+    border: 1px dashed var(--color);
+    opacity: 0.1;
+}
+
+.planet {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    box-shadow: 0 0 15px var(--bg);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    animation: planetCounterRotate var(--d) linear infinite;
+}
+
+@keyframes sunPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes sunGlow {
+    0% { transform: rotate(0deg) scale(1); opacity: 0.5; }
+    50% { transform: rotate(180deg) scale(1.2); opacity: 0.8; }
+    100% { transform: rotate(360deg) scale(1); opacity: 0.5; }
+}
+
+@keyframes orbitRotate {
+    from { transform: rotateX(75deg) rotateY(10deg) rotateZ(0deg); }
+    to { transform: rotateX(75deg) rotateY(10deg) rotateZ(360deg); }
+}
+
+@keyframes planetCounterRotate {
+    from { transform: translate(-50%, -50%) rotateX(-75deg) rotateY(-10deg) rotateZ(0deg); }
+    to { transform: translate(-50%, -50%) rotateX(-75deg) rotateY(-10deg) rotateZ(-360deg); }
 }
 
 .title {
