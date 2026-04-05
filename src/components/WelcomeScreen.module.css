@@ -58,25 +58,39 @@
 }
 
 .solarSystem {
-    width: 20rem;
-    height: 18rem;
+    width: 32rem;
+    height: 28rem;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     margin-bottom: 2rem;
-    perspective: 1000px;
+    perspective: 1500px;
     transform-style: preserve-3d;
 }
 
+.ambientRing {
+    position: absolute;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: ambientRotate 60s linear infinite;
+}
+
+@keyframes ambientRotate {
+    from { transform: rotateX(75deg) rotateY(10deg) rotateZ(0deg); }
+    to { transform: rotateX(75deg) rotateY(10deg) rotateZ(360deg); }
+}
+
 .sun {
-    width: 5rem;
-    height: 5rem;
+    width: 7rem;
+    height: 7rem;
     position: relative;
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: translateZ(20px);
 }
 
 .sunCore {
@@ -86,29 +100,46 @@
     background: radial-gradient(circle at 30% 30%, #ec4899, #a855f7);
     border-radius: 50%;
     box-shadow: 
-        inset -5px -5px 15px rgba(0, 0, 0, 0.4),
-        0 0 40px rgba(168, 85, 247, 0.6);
+        inset -8px -8px 25px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(168, 85, 247, 0.4),
+        0 0 120px rgba(168, 85, 247, 0.2);
     animation: sunPulse 4s ease-in-out infinite;
 }
 
 .sunGlow {
     position: absolute;
-    width: 150%;
-    height: 150%;
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
     border-radius: 50%;
-    animation: sunGlow 6s linear infinite;
+    animation: sunGlow 10s linear infinite;
+}
+
+.sunRing {
+    position: absolute;
+    width: 140%;
+    height: 140%;
+    border: 2px solid rgba(168, 85, 247, 0.3);
+    border-radius: 50%;
+    transform: rotateX(70deg);
+    animation: ringSpin 4s linear infinite;
+}
+
+@keyframes ringSpin {
+    from { transform: rotateX(70deg) rotateZ(0deg); }
+    to { transform: rotateX(70deg) rotateZ(360deg); }
 }
 
 .sunIcon {
     position: relative;
     z-index: 11;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    animation: iconFloat 4s ease-in-out infinite;
 }
 
 .orbit {
     position: absolute;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.03);
     border-radius: 50%;
     width: var(--r);
     height: var(--r);
@@ -119,14 +150,19 @@
 .orbit::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: calc(100% + 2px);
-    height: calc(100% + 2px);
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
     border-radius: 50%;
     border: 1px dashed var(--color);
-    opacity: 0.1;
+    opacity: 0.15;
+    animation: dashRotate 20s linear infinite;
+}
+
+@keyframes dashRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .planet {
@@ -134,30 +170,39 @@
     top: 0;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3.2rem;
+    height: 3.2rem;
     background: var(--bg);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 0.7rem;
-    font-weight: 800;
-    box-shadow: 0 0 15px var(--bg);
+    font-size: 0.8rem;
+    font-weight: 900;
+    box-shadow: 0 0 30px var(--glow);
     border: 2px solid rgba(255, 255, 255, 0.2);
     animation: planetCounterRotate var(--d) linear infinite;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.planet:hover {
+    scale: 1.2;
+    box-shadow: 0 0 50px var(--glow);
+    border-color: #fff;
+    z-index: 100;
 }
 
 @keyframes sunPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    0%, 100% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.05); filter: brightness(1.2); }
 }
 
 @keyframes sunGlow {
-    0% { transform: rotate(0deg) scale(1); opacity: 0.5; }
-    50% { transform: rotate(180deg) scale(1.2); opacity: 0.8; }
-    100% { transform: rotate(360deg) scale(1); opacity: 0.5; }
+    0% { transform: rotate(0deg) scale(1); opacity: 0.4; }
+    50% { transform: rotate(180deg) scale(1.3); opacity: 0.7; }
+    100% { transform: rotate(360deg) scale(1); opacity: 0.4; }
 }
 
 @keyframes orbitRotate {
@@ -166,74 +211,100 @@
 }
 
 @keyframes planetCounterRotate {
-    from { transform: translate(-50%, -50%) rotateX(-75deg) rotateY(-10deg) rotateZ(0deg); }
-    to { transform: translate(-50%, -50%) rotateX(-75deg) rotateY(-10deg) rotateZ(-360deg); }
+    /* We counter the orbit rotation to keep text upright AND add depth scale */
+    0% { transform: translate(-50%, -50%) rotateX(-75deg) rotateY(-10deg) rotateZ(0deg) scale(1) translateZ(10px); opacity: 1; }
+    25% { transform: translate(-50%, -50%) rotateX(-75deg) rotateY(-10deg) rotateZ(-90deg) scale(0.8) translateZ(-50px); opacity: 0.6; }
+    50% { transform: translate(-50%, -50%) rotateX(-75deg) rotateY(-10deg) rotateZ(-180deg) scale(0.7) translateZ(-100px); opacity: 0.4; }
+    75% { transform: translate(-50%, -50%) rotateX(-75deg) rotateY(-10deg) rotateZ(-270deg) scale(0.9) translateZ(-50px); opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) rotateX(-75deg) rotateY(-10deg) rotateZ(-360deg) scale(1) translateZ(10px); opacity: 1; }
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 .title {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 800;
     color: #fff;
     margin-bottom: 1rem;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     letter-spacing: -0.02em;
 }
 
 .sub {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #94a3b8;
     line-height: 1.6;
-    margin-bottom: 3rem;
-    max-width: 30rem;
+    margin-bottom: 4rem;
+    max-width: 34rem;
 }
 
 .featureGrid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
     width: 100%;
-    max-width: 32rem;
-    margin-bottom: 2.5rem;
+    max-width: 48rem;
+    margin-bottom: 3.5rem;
 }
 
 .featureChip {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 0.75rem;
     background: rgba(30, 41, 59, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(8px);
-    border-radius: 0.75rem;
-    padding: 0.75rem 1.25rem;
-    font-size: 0.85rem;
+    border-radius: 1rem;
+    padding: 1.25rem;
+    font-size: 0.9rem;
     color: #cbd5e1;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity: 0;
-    transform: translateY(10px);
-    animation: fadeInSlide 0.5s ease forwards;
+    transform: translateY(20px);
+    animation: fadeInSlide 0.6s ease forwards;
 }
 
 .featureChip:hover {
-    background: rgba(168, 85, 247, 0.1);
-    border-color: rgba(168, 85, 247, 0.3);
-    transform: translateY(-2px);
+    background: rgba(168, 85, 247, 0.15);
+    border-color: rgba(168, 85, 247, 0.4);
+    transform: translateY(-8px) scale(1.05);
     color: #fff;
-    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.1);
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
 }
 
 .featureDot {
     color: #10b981;
-    font-weight: 700;
+    font-weight: 800;
+    font-size: 1.2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .arrow {
-    font-size: 0.85rem;
-    color: #475569;
-    margin-top: 1rem;
-    animation: bounceText 2s ease-in-out infinite;
+    font-size: 0.95rem;
+    color: #64748b;
+    margin-top: 1.5rem;
+    font-weight: 500;
+    animation: bounceText 2.5s ease-in-out infinite;
+}
+
+/* Base Animations */
+@keyframes fadeInSlide {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounceText {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(-8px); opacity: 1; }
 }
 
 /* Animations */

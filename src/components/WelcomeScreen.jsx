@@ -24,20 +24,27 @@ export default function WelcomeScreen() {
 
             <div className={styles.content}>
                 <div className={styles.solarSystem}>
-                    <div className={styles.orbit} style={{ '--d': '15s', '--r': '100px', '--color': '#a855f7' }}>
-                        <div className={styles.planet} style={{ '--bg': '#a855f7' }}>C</div>
+                    {/* Glowing background rings */}
+                    <div className={styles.ambientRing} style={{ width: '400px', height: '400px', opacity: 0.03 }} />
+                    <div className={styles.ambientRing} style={{ width: '600px', height: '600px', opacity: 0.02 }} />
+
+                    {/* Orbits & Planets */}
+                    <div className={styles.orbit} style={{ '--d': '12s', '--r': '160px', '--color': '#8b5cf6' }}>
+                        <div className={styles.planet} style={{ '--bg': '#8b5cf6', '--glow': 'rgba(139, 92, 246, 0.5)' }}>C</div>
                     </div>
-                    <div className={styles.orbit} style={{ '--d': '25s', '--r': '140px', '--color': '#3b82f6' }}>
-                        <div className={styles.planet} style={{ '--bg': '#3b82f6' }}>C++</div>
+                    <div className={styles.orbit} style={{ '--d': '22s', '--r': '240px', '--color': '#3b82f6' }}>
+                        <div className={styles.planet} style={{ '--bg': '#3b82f6', '--glow': 'rgba(59, 130, 246, 0.5)' }}>C++</div>
                     </div>
-                    <div className={styles.orbit} style={{ '--d': '35s', '--r': '180px', '--color': '#f59e0b' }}>
-                        <div className={styles.planet} style={{ '--bg': '#f59e0b' }}>Py</div>
+                    <div className={styles.orbit} style={{ '--d': '32s', '--r': '320px', '--color': '#f59e0b' }}>
+                        <div className={styles.planet} style={{ '--bg': '#f59e0b', '--glow': 'rgba(245, 158, 11, 0.5)' }}>Python</div>
                     </div>
                     
+                    {/* Central Core (The Compiler) */}
                     <div className={styles.sun}>
                         <div className={styles.sunCore} />
                         <div className={styles.sunGlow} />
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.sunIcon}>
+                        <div className={styles.sunRing} />
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.sunIcon}>
                             <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
                             <circle cx="12" cy="12" r="4" />
                         </svg>
