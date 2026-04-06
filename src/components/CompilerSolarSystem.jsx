@@ -163,7 +163,7 @@ const Scene = () => {
             <EffectComposer disableNormalPass>
                 <Bloom luminanceThreshold={0.5} mipmapBlur intensity={2} radius={0.5} />
                 <Noise opacity={0.15} />
-                <Vignette darknes={1.2} />
+                <Vignette darkness={1.2} />
             </EffectComposer>
 
             <PerspectiveCamera makeDefault position={[0, 15, 40]} fov={45} />

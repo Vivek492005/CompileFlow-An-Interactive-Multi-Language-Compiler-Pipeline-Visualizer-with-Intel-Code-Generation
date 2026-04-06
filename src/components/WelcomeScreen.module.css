@@ -58,18 +58,17 @@
 }
 
 .solarSystemWrapper {
-    width: 100vw;
-    height: 40rem;
+    width: 100%;
+    height: 38rem;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     z-index: 10;
     margin-bottom: 2rem;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
     background: radial-gradient(circle at center, rgba(16, 24, 39, 0.7) 0%, transparent 80%);
     pointer-events: all;
+    overflow: hidden;
 }
 
 .title {
