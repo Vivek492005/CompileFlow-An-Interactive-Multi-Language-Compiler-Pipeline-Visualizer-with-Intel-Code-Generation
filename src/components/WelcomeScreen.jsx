@@ -12,14 +12,18 @@ const FEATURES = [
 ];
 
 export default function WelcomeScreen() {
+    useEffect(() => {
+        console.log("WelcomeScreen (v2.0 - 3D) Mounted");
+    }, []);
+
     return (
         <div className={styles.wrap}>
             <div className={styles.content}>
-                <div className={styles.solarSystemWrapper}>
+                <div className={styles.solarSystemWrapper} id="compiler-solar-system">
                     <CompilerSolarSystem />
                 </div>
                 
-                <h2 className={styles.title}>Compiler Pipeline Ready</h2>
+                <h2 className={styles.title}>CompileFlow — Futuristic 3D Visualization</h2>
                 <p className={styles.sub}>
                     Enter your source code and click <strong>Compile &amp; Analyze</strong> to visualize<br />
                     the entire pipeline — from tokens to 8085 assembly.
