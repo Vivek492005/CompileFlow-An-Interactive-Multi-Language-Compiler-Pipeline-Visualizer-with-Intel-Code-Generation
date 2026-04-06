@@ -13,7 +13,7 @@ const FEATURES = [
 
 export default function WelcomeScreen() {
     useEffect(() => {
-        console.log("WelcomeScreen (v2.0 - 3D) Mounted");
+        console.log("WelcomeScreen (v3.0 - Safe Mode) Mounted");
     }, []);
 
     return (
@@ -23,10 +23,10 @@ export default function WelcomeScreen() {
                     <CompilerSolarSystem />
                 </div>
                 
-                <h2 className={styles.title}>CompileFlow — Futuristic 3D Visualization</h2>
+                <h2 className={styles.title}>CompileFlow — 3D Visualizer</h2>
                 <p className={styles.sub}>
-                    Enter your source code and click <strong>Compile &amp; Analyze</strong> to visualize<br />
-                    the entire pipeline — from tokens to 8085 assembly.
+                    <strong>Visualizing 7 Stages of Compilation in 3D</strong><br />
+                    Enter your source code and click Compile &amp; Analyze to see the pipeline in action.
                 </p>
 
                 <div className={styles.featureGrid}>
@@ -42,7 +42,9 @@ export default function WelcomeScreen() {
                     ))}
                 </div>
                 
-                <div className={styles.arrow}>↑ Paste code on the left, then hit Compile</div>
+                <div className={styles.arrow} style={{ color: '#a855f7' }}>
+                    ⚡ 3D Engine Core Active
+                </div>
             </div>
         </div>
     );
